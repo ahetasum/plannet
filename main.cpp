@@ -72,3 +72,28 @@ public:
     }
 };
 
+class SpaceMission {
+private:
+    string missionName;
+    Planet* targetPlanet;
+
+public:
+    SpaceMission(string name, Planet* target) {
+        missionName = name;
+        targetPlanet = target;
+    }
+
+    void launchMission() {
+        cout << "\nLaunching " << missionName << "!" << endl;
+        cout << "Target: " << targetPlanet->getName() << endl;
+        performComplexCalculations();
+        cout << "Mission launched successfully!" << endl;
+    }
+
+private:
+    void performComplexCalculations() {
+        cout << "Calculating trajectory..." << endl;
+        cout << "Checking fuel requirements..." << endl;
+        cout << "Verifying communication systems..." << endl;
+    }
+};
