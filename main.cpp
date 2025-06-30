@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <vector>
 using namespace std;
 
 class Planet {
@@ -32,19 +33,6 @@ public:
     void addMoon() { moons++; }
     void addMoon(int count) { moons += count; }
 };
-
-int main() {
-    Planet mars("Mars", 6779, 2);
-    mars.displayInfo();
-    mars.addMoon();
-    mars.addMoon(2);
-    cout << "After adding moons: " << mars.getMoons() << endl;
-    return 0;
-}
-Earth earth(15.0);
-earth.checkLife();
-earth.displayInfo();
-
 
 class Earth : public Planet {
 private:
@@ -128,7 +116,6 @@ public:
         cout << "I am a moon named " << name << " - I orbit planets! 🌙" << endl;
     }
 };
-#include <vector>
 
 class SolarSystem {
 private:
@@ -162,15 +149,6 @@ public:
 
     int getPlanetCount() { return planets.size(); }
 };
-SolarSystem ourSystem("Solar System", "Sun");
-ourSystem.addPlanet(Planet("Mercury", 4879, 0));
-ourSystem.addPlanet(Planet("Venus", 12104, 0));
-ourSystem.addPlanet(earth);
-ourSystem.showSystem();
-
-cout << "\n=== 6. OPERATOR OVERLOADING ===" << endl;
-cout << "Second planet using []: " << ourSystem[1].getName() << endl;
-
 
 class PlanetCounter {
 private:
@@ -191,11 +169,6 @@ public:
 };
 
 int PlanetCounter::totalPlanets = 0;
-cout << "\n=== 7. STATIC MEMBERS (Shared Data) ===" << endl;
-PlanetCounter::addPlanet();
-PlanetCounter::addPlanet();
-PlanetCounter::addPlanet();
-PlanetCounter::showStats();
 
 template<class T>
 class SimpleContainer {
@@ -216,21 +189,9 @@ public:
 
     int size() { return items.size(); }
 };
-cout << "\n=== 8. TEMPLATES (Generic Programming) ===" << endl;
-SimpleContainer<string> planetNames;
-planetNames.add("Earth");
-planetNames.add("Mars");
-planetNames.add("Venus");
-planetNames.showAll();
 
 bool isBigger(Planet& p1, Planet& p2) {
     return p1.getSize() > p2.getSize();
-}
-
-cout << "\n=== 9. FRIEND FUNCTION ===" << endl;
-Planet jupiter("Jupiter", 139820, 79);
-if (isBigger(jupiter, mars)) {  
-    cout << "Jupiter is bigger than Mars!" << endl;
 }
 
 class PlanetError {
@@ -244,13 +205,69 @@ public:
         return errorMessage;
     }
 };
-try {
-    Planet testPlanet("Test", -100, 0);
-    if (testPlanet.getSize() < 0) {
-        throw PlanetError("Planet size cannot be negative!");
+
+int main() {
+    Planet mars("Mars", 6779, 2);
+    mars.displayInfo();
+    mars.addMoon();
+    mars.addMoon(2);
+    cout << "After adding moons: " << mars.getMoons() << endl;
+
+    Earth earth(15.0);
+    earth.checkLife();
+    earth.displayInfo();
+
+    SpaceMission mission("Mars Explorer", &mars);
+    mission.launchMission();
+
+    CelestialBody* objects[3];
+    objects[0] = new Star("Sun");
+    objects[1] = new Moon("Luna");
+    objects[2] = new CelestialBody("Asteroid");
+
+    for (int i = 0; i < 3; i++) {
+        objects[i]->describe();
     }
-} catch (PlanetError& e) {
-    cout << "Error caught: " << e.getMessage() << endl;
+    for (int i = 0; i < 3; i++) {
+        delete objects[i];
+    }
+
+    SolarSystem ourSystem("Solar System", "Sun");
+    ourSystem.addPlanet(Planet("Mercury", 4879, 0));
+    ourSystem.addPlanet(Planet("Venus", 12104, 0));
+    ourSystem.addPlanet(earth);
+    ourSystem.showSystem();
+
+    cout << "\n=== 6. OPERATOR OVERLOADING ===" << endl;
+    cout << "Second planet using []: " << ourSystem[1].getName() << endl;
+
+    cout << "\n=== 7. STATIC MEMBERS (Shared Data) ===" << endl;
+    PlanetCounter::addPlanet();
+    PlanetCounter::addPlanet();
+    PlanetCounter::addPlanet();
+    PlanetCounter::showStats();
+
+    cout << "\n=== 8. TEMPLATES (Generic Programming) ===" << endl;
+    SimpleContainer<string> planetNames;
+    planetNames.add("Earth");
+    planetNames.add("Mars");
+    planetNames.add("Venus");
+    planetNames.showAll();
+
+    cout << "\n=== 9. FRIEND FUNCTION ===" << endl;
+    Planet jupiter("Jupiter", 139820, 79);
+    if (isBigger(jupiter, mars)) {  
+        cout << "Jupiter is bigger than Mars!" << endl;
+    }
+
+    try {
+        Planet testPlanet("Test", -100, 0);
+        if (testPlanet.getSize() < 0) {
+            throw PlanetError("Planet size cannot be negative!");
+        }
+    } catch (PlanetError& e) {
+        cout << "Error caught: " << e.getMessage() << endl;
+    }
+
+    return 0;
 }
-
-
