@@ -41,3 +41,30 @@ int main() {
     cout << "After adding moons: " << mars.getMoons() << endl;
     return 0;
 }
+
+class Earth : public Planet {
+private:
+    bool hasLife;
+    double temperature;
+
+public:
+    Earth(double temp) : Planet("Earth", 12742, 1) {
+        hasLife = true;
+        temperature = temp;
+    }
+
+    void checkLife() {
+        if (hasLife) {
+            cout << "Earth has life!" << endl;
+        }
+    }
+
+    void displayInfo() {
+        cout << "Planet: " << getName() << " (Our Home!)" << endl;
+        cout << "Size: " << getSize() << " km" << endl;
+        cout << "Moons: " << getMoons() << endl;
+        cout << "Temperature: " << temperature << "°C" << endl;
+        cout << "Has Life: " << (hasLife ? "Yes" : "No") << endl;
+    }
+};
+
