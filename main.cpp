@@ -222,3 +222,15 @@ planetNames.add("Earth");
 planetNames.add("Mars");
 planetNames.add("Venus");
 planetNames.showAll();
+
+bool isBigger(Planet& p1, Planet& p2) {
+    return p1.getSize() > p2.getSize();
+}
+
+cout << "\n=== 9. FRIEND FUNCTION ===" << endl;
+Planet jupiter("Jupiter", 139820, 79);
+if (isBigger(jupiter, mars)) {  
+    cout << "Jupiter is bigger than Mars!" << endl;
+}
+
+
