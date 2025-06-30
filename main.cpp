@@ -128,4 +128,45 @@ public:
         cout << "I am a moon named " << name << " - I orbit planets! 🌙" << endl;
     }
 };
+#include <vector>
 
+class SolarSystem {
+private:
+    string systemName;
+    vector<Planet> planets;
+    Star centralStar;
+
+public:
+    SolarSystem(string name, string starName) 
+        : systemName(name), centralStar(starName) {}
+
+    void addPlanet(Planet p) {
+        planets.push_back(p);
+        cout << "Added " << p.getName() << " to " << systemName << endl;
+    }
+
+    void showSystem() {
+        cout << "\n=== " << systemName << " ===" << endl;
+        centralStar.describe();
+        cout << "Planets in this system:" << endl;
+
+        for (int i = 0; i < planets.size(); i++) {
+            cout << (i+1) << ". ";
+            planets[i].displayInfo();
+        }
+    }
+
+    Planet& operator[](int index) {
+        return planets[index];
+    }
+
+    int getPlanetCount() { return planets.size(); }
+};
+SolarSystem ourSystem("Solar System", "Sun");
+ourSystem.addPlanet(Planet("Mercury", 4879, 0));
+ourSystem.addPlanet(Planet("Venus", 12104, 0));
+ourSystem.addPlanet(earth);
+ourSystem.showSystem();
+
+cout << "\n=== 6. OPERATOR OVERLOADING ===" << endl;
+cout << "Second planet using []: " << ourSystem[1].getName() << endl;
