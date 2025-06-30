@@ -97,3 +97,35 @@ private:
         cout << "Verifying communication systems..." << endl;
     }
 };
+
+class CelestialBody {
+public:
+    string name;
+
+    CelestialBody(string n) : name(n) {}
+
+    virtual void describe() {
+        cout << "I am a celestial body named " << name << endl;
+    }
+
+    virtual ~CelestialBody() {}
+};
+
+class Star : public CelestialBody {
+public:
+    Star(string n) : CelestialBody(n) {}
+
+    void describe() override {
+        cout << "I am a star named " << name << " - I shine bright! ⭐" << endl;
+    }
+};
+
+class Moon : public CelestialBody {
+public:
+    Moon(string n) : CelestialBody(n) {}
+
+    void describe() override {
+        cout << "I am a moon named " << name << " - I orbit planets! 🌙" << endl;
+    }
+};
+
