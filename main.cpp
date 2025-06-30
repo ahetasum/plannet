@@ -170,3 +170,30 @@ ourSystem.showSystem();
 
 cout << "\n=== 6. OPERATOR OVERLOADING ===" << endl;
 cout << "Second planet using []: " << ourSystem[1].getName() << endl;
+
+
+class PlanetCounter {
+private:
+    static int totalPlanets;
+
+public:
+    static void addPlanet() {
+        totalPlanets++;
+    }
+
+    static int getTotalPlanets() {
+        return totalPlanets;
+    }
+
+    static void showStats() {
+        cout << "Total planets created: " << totalPlanets << endl;
+    }
+};
+
+int PlanetCounter::totalPlanets = 0;
+cout << "\n=== 7. STATIC MEMBERS (Shared Data) ===" << endl;
+PlanetCounter::addPlanet();
+PlanetCounter::addPlanet();
+PlanetCounter::addPlanet();
+PlanetCounter::showStats();
+
