@@ -41,6 +41,10 @@ int main() {
     cout << "After adding moons: " << mars.getMoons() << endl;
     return 0;
 }
+Earth earth(15.0);
+earth.checkLife();
+earth.displayInfo();
+
 
 class Earth : public Planet {
 private:
