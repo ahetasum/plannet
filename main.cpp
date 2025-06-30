@@ -233,4 +233,24 @@ if (isBigger(jupiter, mars)) {
     cout << "Jupiter is bigger than Mars!" << endl;
 }
 
+class PlanetError {
+private:
+    string errorMessage;
+
+public:
+    PlanetError(string msg) : errorMessage(msg) {}
+
+    string getMessage() {
+        return errorMessage;
+    }
+};
+try {
+    Planet testPlanet("Test", -100, 0);
+    if (testPlanet.getSize() < 0) {
+        throw PlanetError("Planet size cannot be negative!");
+    }
+} catch (PlanetError& e) {
+    cout << "Error caught: " << e.getMessage() << endl;
+}
+
 
