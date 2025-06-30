@@ -197,3 +197,28 @@ PlanetCounter::addPlanet();
 PlanetCounter::addPlanet();
 PlanetCounter::showStats();
 
+template<class T>
+class SimpleContainer {
+private:
+    vector<T> items;
+
+public:
+    void add(T item) {
+        items.push_back(item);
+    }
+
+    void showAll() {
+        cout << "Container contents:" << endl;
+        for (int i = 0; i < items.size(); i++) {
+            cout << "- " << items[i] << endl;
+        }
+    }
+
+    int size() { return items.size(); }
+};
+cout << "\n=== 8. TEMPLATES (Generic Programming) ===" << endl;
+SimpleContainer<string> planetNames;
+planetNames.add("Earth");
+planetNames.add("Mars");
+planetNames.add("Venus");
+planetNames.showAll();
